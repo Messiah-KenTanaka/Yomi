@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './GameHome.scss';
 import clickSound from '../assets/sounds/effects/startButton.mp3';
+import rainSound from '../assets/sounds/music/rain_01.mp3';
 import VolumeControl from './VolumeControl';
 
 const GameHome = () => {
-	const audio = new Audio(clickSound);
+	const audio = new Audio(clickSound); // 効果音を初期化
+	const sound = new Audio(rainSound);  // サウンドを初期化 
 
 	const handleVolumeChange =  (value: number) => {
 		audio.volume = value;
 	}
+
+  // useEffect(() => {
+  //   sound.volume = 0.2; // サウンドの音量
+  //   sound.play(); // サウンドを作成
+
+  //   return () => {
+  //     sound.pause(); // サウンドを停止
+  //   }
+  // }, []);
 
   const handlePlaySound = () => {
     audio.play();
