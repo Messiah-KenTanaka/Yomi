@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "firebaseConfig.js"  ]
+, "firebaseConfig.js", "typings.d.ts"  ]
 }
