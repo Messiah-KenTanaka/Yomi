@@ -4,8 +4,8 @@
 
 /* フォントの定義 */
 @font-face {
-    font-family: 'Onryou'; /* こちらの名前を後で指定する際に使用します */
-    src: url('./assets/fonts/onryou.TTF') format('truetype'); /* フォントファイルのパスを指定 */
+    font-family: 'Onryou';
+    src: url('./assets/fonts/onryou.TTF') format('truetype');
 }
 
 body {
