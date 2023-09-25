@@ -1,9 +1,14 @@
 import React from 'react';
 import './GameHome.scss';
 import clickSound from '../assets/sounds/effects/startButton.mp3';
+import VolumeControl from './VolumeControl';
 
 const GameHome = () => {
 	const audio = new Audio(clickSound);
+
+	const handleVolumeChange =  (value: number) => {
+		audio.volume = value;
+	}
 
   const handlePlaySound = () => {
     audio.play();
@@ -20,6 +25,7 @@ const GameHome = () => {
         <div className='p-5 shadow-lg rounded'>
           <p className="text-2xl mb-2" onClick={handlePlaySound}>はじめる</p>
           <p className="text-2xl" onClick={handlePlaySound}>設定</p>
+					<VolumeControl onVolumeChange={handleVolumeChange} />
         </div>
       </div>
     </div>
