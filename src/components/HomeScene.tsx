@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Phaser, { AUTO } from 'phaser';
+import { Link } from 'react-router-dom';
 import './HomeScene.scss';
 import SettingsModal from './SettingsModal';
 import titleSound from '../assets/sounds/effects/titleButton.mp3';
@@ -79,7 +80,9 @@ const HomeScene: React.FC = () => {
 
         <div className='flex-grow flex items-center justify-center'>
           <div className='p-5 shadow-lg rounded'>
-            <p className="text-2xl mb-2" onClick={() => handlePlaySound('start')}>はじめる</p>
+            <Link to="/game">
+              <p className="text-2xl mb-2" onClick={() => handlePlaySound('start')}>はじめる</p>
+            </Link>
             <p className="text-2xl" onClick={handleSettingClick}>設定</p>
           </div>
         </div>
