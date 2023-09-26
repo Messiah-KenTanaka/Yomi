@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Phaser, { AUTO } from 'phaser';
+import './GameScene.scss';
 
 const GameScene: React.FC = () => {
   useEffect(() => {
@@ -26,7 +27,11 @@ const GameScene: React.FC = () => {
   }, []);
 
   return (
-    <div id="game-scene-container">GameSceneです</div>
+    <div id="game-scene-container">
+      <div className='Game'>
+        GameSceneです
+      </div>
+    </div>
   );
 }
 

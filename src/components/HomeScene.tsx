@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Phaser, { AUTO } from 'phaser';
 import { Link } from 'react-router-dom';
 import './HomeScene.scss';
+import SynopsisModal from './SynopsisModal';
 import SettingsModal from './SettingsModal';
 import titleSound from '../assets/sounds/effects/titleButton.mp3';
 import startSound from '../assets/sounds/effects/startButton.mp3';
@@ -29,6 +30,7 @@ const HomeScene: React.FC = () => {
     };
   }, []);
 
+  const [isSynopsisModalOpen, setIsSynopsisModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentVolume, setCurrentVolume] = useState(1);
 
@@ -44,19 +46,19 @@ const HomeScene: React.FC = () => {
     soundEffects[soundKey].play();
   };
 
-  // 設定クリック
-  const handleSettingClick = () => {
-    handlePlaySound('setting'); // 効果音
-    handleOpenModal(); // 設定モーダルOpen
-  }
+  // あらすじモーダル
+  const handleOpenSynopsisModal = () => {
+    setIsSynopsisModalOpen(true);
+  };
 
-  // 音量の変更
-  const handleVolumeChange =  (value: number) => {
-		Object.values(soundEffects).forEach(audioInstance => {
-      audioInstance.volume = value;
-    });
-    setCurrentVolume(value); // 現在の音量を更新
-	}
+  const handleCloseSynopsisModal = () => {
+    setIsSynopsisModalOpen(false);
+  };
+  // あらすじクリック
+  const handleSynopsisClick = () => {
+    handlePlaySound('setting'); // 効果音
+    handleOpenSynopsisModal(); // あらすじモーダルOpen
+  }
 
   // 設定モーダル
   const handleOpenModal = () => {
@@ -67,9 +69,24 @@ const HomeScene: React.FC = () => {
     setIsModalOpen(false);
   };
 
+  // 設定クリック
+  const handleSettingClick = () => {
+    handlePlaySound('setting'); // 効果音
+    handleOpenModal(); // 設定モーダルOpen
+  }
+
+  // 音量の変更
+  const handleVolumeChange =  (value: number) => {
+    Object.values(soundEffects).forEach(audioInstance => {
+      audioInstance.volume = value;
+    });
+    setCurrentVolume(value); // 現在の音量を更新
+  }
+
   return (
     <div id="home-scene-game">
 
+      <SynopsisModal isOpen={isSynopsisModalOpen} onClose={handleCloseSynopsisModal} />
       <SettingsModal isOpen={isModalOpen} onClose={handleCloseModal} onVolumeChange={handleVolumeChange} volume={currentVolume} />
 
       <div className="AppHome min-h-screen flex flex-col justify-between">
@@ -83,6 +100,7 @@ const HomeScene: React.FC = () => {
             <Link to="/game">
               <p className="text-2xl mb-2" onClick={() => handlePlaySound('start')}>はじめる</p>
             </Link>
+            <p className="text-2xl mb-2" onClick={handleSynopsisClick}>あらすじ</p>
             <p className="text-2xl" onClick={handleSettingClick}>設定</p>
           </div>
         </div>
