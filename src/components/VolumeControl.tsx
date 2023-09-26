@@ -1,15 +1,20 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useEffect, ChangeEvent, useState } from 'react';
 
 type VolumeControlProps = {
   onVolumeChange: (value:number) => void;
+  volume: number;
 };
 
-const VolumeControl: React.FC<VolumeControlProps> = ({ onVolumeChange }) => {
-  const [volume, setVolume] = useState(1); // 初期後リューム100%
+const VolumeControl: React.FC<VolumeControlProps> = ({ onVolumeChange, volume }) => {
+  const [currentVolume, setCurrentVolume] = useState(volume);
+
+  useEffect(() => {
+    setCurrentVolume(volume);
+  }, [volume]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseFloat(event.target.value);
-    setVolume(newVolume);
+    setCurrentVolume(newVolume);
     onVolumeChange(newVolume);
   };
     
@@ -19,7 +24,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({ onVolumeChange }) => {
       min="0"
       max="1"
       step="0.1"
-      value={volume}
+      value={currentVolume}
       onChange={handleChange}
     />
   )
