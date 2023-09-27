@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Phaser, { AUTO } from 'phaser';
 import { Link } from 'react-router-dom';
 import './HomeScene.scss';
+import { SettingsContext } from '../SettingsContext';
 import SynopsisModal from './SynopsisModal';
-import SettingsModal from './SettingsModal';
-import titleSound from '../assets/sounds/effects/titleButton.mp3';
-import startSound from '../assets/sounds/effects/startButton.mp3';
-import settingSound from '../assets/sounds/effects/settingButton.mp3';
 
 const HomeScene: React.FC = () => {
+  const { handleOpenModal } = useContext(SettingsContext)!;
+  
   useEffect(() => {
     const config: Phaser.Types.Core.GameConfig = {
       type: Phaser.AUTO,
@@ -31,20 +30,6 @@ const HomeScene: React.FC = () => {
   }, []);
 
   const [isSynopsisModalOpen, setIsSynopsisModalOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentVolume, setCurrentVolume] = useState(1);
-
-  // 効果音のマッピング
-  const soundEffects = useRef({
-    title: new Audio(titleSound),
-    start: new Audio(startSound),
-    setting: new Audio(settingSound),
-  }).current;
-
-  // 効果音を再生する関数
-  const handlePlaySound = (soundKey: keyof typeof soundEffects) => {
-    soundEffects[soundKey].play();
-  };
 
   // あらすじモーダル
   const handleOpenSynopsisModal = () => {
@@ -54,43 +39,15 @@ const HomeScene: React.FC = () => {
   const handleCloseSynopsisModal = () => {
     setIsSynopsisModalOpen(false);
   };
-  // あらすじクリック
-  const handleSynopsisClick = () => {
-    handlePlaySound('setting'); // 効果音
-    handleOpenSynopsisModal(); // あらすじモーダルOpen
-  }
-
-  // 設定モーダル
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // 設定クリック
-  const handleSettingClick = () => {
-    handlePlaySound('setting'); // 効果音
-    handleOpenModal(); // 設定モーダルOpen
-  }
-
-  // 音量の変更
-  const handleVolumeChange =  (value: number) => {
-    Object.values(soundEffects).forEach(audioInstance => {
-      audioInstance.volume = value;
-    });
-    setCurrentVolume(value); // 現在の音量を更新
-  }
 
   return (
     <div id="home-scene-game">
 
       <SynopsisModal isOpen={isSynopsisModalOpen} onClose={handleCloseSynopsisModal} />
-      <SettingsModal isOpen={isModalOpen} onClose={handleCloseModal} onVolumeChange={handleVolumeChange} volume={currentVolume} />
+      {/* <SettingsModal isOpen={isModalOpen} onClose={handleCloseModal} onVolumeChange={handleVolumeChange} volume={currentVolume} /> */}
 
       <div className="AppHome min-h-screen flex flex-col justify-between">
-        <div className='p-5' onClick={() => handlePlaySound('title')}>
+        <div className='p-5'>
           <h1 className="text-4xl font-bold leading-tight py-3">黄泉</h1>
           <p className="text-2xl">-地獄からの誘い-</p>
         </div>
@@ -98,10 +55,10 @@ const HomeScene: React.FC = () => {
         <div className='flex-grow flex items-center justify-center'>
           <div className='p-5 shadow-lg rounded'>
             <Link to="/game">
-              <p className="text-2xl mb-2" onClick={() => handlePlaySound('start')}>はじめる</p>
+              <p className="text-2xl mb-2">はじめる</p>
             </Link>
-            <p className="text-2xl mb-2" onClick={handleSynopsisClick}>あらすじ</p>
-            <p className="text-2xl" onClick={handleSettingClick}>設定</p>
+            <p className="text-2xl mb-2" onClick={handleOpenSynopsisModal}>あらすじ</p>
+            <p className="text-2xl" onClick={handleOpenModal}>設定</p>
           </div>
         </div>
       </div>
