@@ -7,6 +7,7 @@ import SettingsIcon from '../assets/images/kokeshi.gif';
 
 const GameScene: React.FC = () => {
   const { handleOpenModal } = useContext(SettingsContext)!;
+  
   useEffect(() => {
     const canvasWidth = window.innerWidth;
     const canvasHeight = window.innerHeight;
