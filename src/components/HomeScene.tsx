@@ -42,7 +42,7 @@ const HomeScene: React.FC = () => {
 
   // あらすじ
   const handleOpenSynopsisModal = () => {
-    soundEffects.setting.play();
+    soundEffects.arasuji.play();
     setIsSynopsisModalOpen(true);
   };
 
