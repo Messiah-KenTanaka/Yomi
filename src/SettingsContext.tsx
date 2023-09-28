@@ -2,6 +2,7 @@ import React, { createContext, useState, ReactNode, useRef, useEffect } from 're
 import SettingsModal from './components/SettingsModal';
 import titileSound from './assets/sounds/effects/titleButton.mp3';
 import startButton from './assets/sounds/effects/startButton.mp3';
+import arasujiButton from './assets/sounds/effects/arasujiButton.mp3';
 import settingButton from './assets/sounds/effects/settingButton.mp3';
 
 interface SettingsContextProps {
@@ -26,6 +27,7 @@ export const SettingsProvider = ({ children }: SettingsProviderProps) => {
   const soundEffects = useRef({
     title: new Audio(titileSound),
     start: new Audio(startButton),
+    arasuji: new Audio(arasujiButton),
     setting: new Audio(settingButton),
   }).current;
 

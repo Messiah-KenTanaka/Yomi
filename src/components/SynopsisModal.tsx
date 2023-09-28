@@ -20,9 +20,9 @@ const SynopsisModal: React.FC<SynopsisModalProps> = ({ isOpen, onClose}) => {
           1988年9月28日、昭和の終わりに近づいた頃、古びた家に、父、母、そして娘の三人家族が暮らしていた。
           ある日、両親は急用が生じた。
           <div className="text-black my-2">
-            <span className="block font-semibold">母「急がないとっ！」</span>
+            <span className="block font-semibold">母「急がないとッ！シンディ留守番よろしくね。」</span>
           </div>
-          と言いながら、娘に留守番を頼む。その際、慌てていた母が部屋の神棚に置いてあった鏡をうっかり落とし亀裂が入ってしまう。
+          と言いながら、娘シンディに留守番を頼む。その際、慌てていた母が部屋の神棚に置いてあった鏡をうっかり落とし亀裂が入ってしまう。
           <div className="text-black my-2">
             <span className="block font-semibold">「パリンッ」</span>
           </div>
@@ -32,7 +32,7 @@ const SynopsisModal: React.FC<SynopsisModalProps> = ({ isOpen, onClose}) => {
           普段の温かみのある家は、何かに取り憑かれたかのように、地獄の景色を映し出していた。
         </div>
         <div className="text-black my-2">
-          <span className="block font-semibold">娘「ここはどこ・・・？」</span>
+          <span className="block font-semibold">シンディ「ここはどこ・・・？」</span>
         </div>
         <button className="mt-4 text-black self-center" onClick={onClose}>閉じる</button>
       </div>
